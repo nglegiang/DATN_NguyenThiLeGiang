@@ -1,0 +1,6 @@
+tcs,username,password,elementMsg,expectedErrorMessage
+loginFailWithUsernameNull,,password,errorUsername,Vui lòng nhập tài khoản
+loginFailWithUsernameDoesNotExist,username,password,errorMessage,Tài khoản hoặc mật khẩu không đúng.
+loginFailWithPasswordNull,username,,errorPassword,Vui lòng nhập mật khẩu
+loginFailWithIncorrectPassword,username,password,errorMessage,Tài khoản hoặc mật khẩu không đúng.
+loginAdminSuccsess,admin,@Ami2021,,

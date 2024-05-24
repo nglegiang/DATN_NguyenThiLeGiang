@@ -1,0 +1,62 @@
+<addresses>
+	<address>
+        <name></name>
+        <phone></phone>
+        <email></email>
+        <city></city>
+        <district></district>
+        <ward></ward>
+        <detailaddress></detailaddress>
+    </address>
+
+    <address>
+        <name>Nguyễn Văn An</name>
+        <phone>0909123456</phone>
+        <email>nguyenvanan@example.com</email>
+        <city>Hà Nội</city>
+        <district>Ba Đình</district>
+        <ward>Phúc Xá</ward>
+        <detailaddress>123 Đường Bưởi</detailaddress>
+    </address>
+    
+    <address>
+        <name>Nguyễn Văn An</name>
+        <phone>0909123456</phone>
+        <email>nguyenvana</email>
+        <city>Hà Nội</city>
+        <district>Ba Đình</district>
+        <ward>Phúc Xá</ward>
+        <detailaddress>123 Đường Bưởi</detailaddress>
+    </address>
+
+	<address>
+        <name>Nguyễn Văn An</name>
+        <phone>0909123456</phone>
+        <email>nguyenvana.com</email>
+        <city>Hà Nội</city>
+        <district>Ba Đình</district>
+        <ward>Phúc Xá</ward>
+        <detailaddress>123 Đường Bưởi</detailaddress>
+    </address>
+
+	<address>
+        <name>Nguyễn Văn An</name>
+        <phone>0909123456</phone>
+        <email>nguyenvana@</email>
+        <city>Hà Nội</city>
+        <district>Ba Đình</district>
+        <ward>Phúc Xá</ward>
+        <detailaddress>123 Đường Bưởi</detailaddress>
+    </address>
+
+<address>
+        <name>Nguyễn Văn An</name>
+        <phone>0909123456</phone>
+        <email>nguyenvana@gmail</email>
+        <city>Hà Nội</city>
+        <district>Ba Đình</district>
+        <ward>Phúc Xá</ward>
+        <detailaddress>123 Đường Bưởi</detailaddress>
+    </address>
+
+</addresses>
