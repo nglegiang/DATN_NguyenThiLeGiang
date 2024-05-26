@@ -1,5 +1,6 @@
 package cms.prugift.amitech.vn.commons;
 
+import cms.prugift.amitech.vn.utils.LogUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,9 +11,9 @@ import org.testng.annotations.*;
 import java.time.Duration;
 
 public class BaseSetup {
-    public WebDriver driver;
+    public static WebDriver driver;
 
-    public WebDriver getDriver() {
+    public static WebDriver getDriver() {
         return driver;
     }
 
@@ -25,14 +26,14 @@ public class BaseSetup {
                 driver = initEdgeDriver();
                 break;
             default:
-                System.out.println("Browser: " + browserType + " is invalid, Launching Chrome as browser of choice...");
+                LogUtils.error("Browser: " + browserType + " is invalid, Launching Chrome as browser of choice...");
                 driver = initChromeDriver();
         }
         return driver;
     }
 
     private WebDriver initChromeDriver() {
-        System.out.println("Launching Chrome browser...");
+        LogUtils.info("Launching Chrome browser...");
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -43,7 +44,7 @@ public class BaseSetup {
     }
 
     private WebDriver initEdgeDriver() {
-        System.out.println("Launching Edge browser...");
+        LogUtils.info("Launching Edge browser...");
         WebDriverManager.edgedriver().setup();
         driver = new EdgeDriver();
         driver.manage().window().maximize();
@@ -65,7 +66,7 @@ public class BaseSetup {
                 driver.navigate().to(appURL);
                 break;
             default:
-                System.out.println("Browser " + browserType + " not supported. Launching Chrome as browser of choice...");
+                LogUtils.error("Browser " + browserType + " not supported. Launching Chrome as browser of choice...");
                 driver = initChromeDriver();
 
         }

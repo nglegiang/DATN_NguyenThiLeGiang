@@ -35,7 +35,6 @@ public class PropertiesFile {
         try {
             //get values from properties file
             value = properties.getProperty(KeyProp);
-            System.out.println(value);
             return value;
         } catch (Exception exp) {
             System.out.println(exp.getMessage());

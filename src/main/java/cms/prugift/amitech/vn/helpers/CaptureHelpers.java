@@ -1,5 +1,6 @@
 package cms.prugift.amitech.vn.helpers;
 
+import cms.prugift.amitech.vn.utils.LogUtils;
 import cms.prugift.amitech.vn.utils.PropertiesFile;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -38,14 +39,16 @@ public class CaptureHelpers extends ScreenRecorder {
             // Gọi hàm getScreenshotAs để chuyển hóa hình ảnh về dạng FILE
             File source = ts.getScreenshotAs(OutputType.FILE);
             //Kiểm tra folder nếu không tồn tại thì tạo folder
-            File theDir = new File(projectPath + PropertiesFile.getPropValue("exportCapturePath") + "/" + screenName);
+            File theDir = new File(projectPath + PropertiesFile.getPropValue("exportCapturePath"));
             if (!theDir.exists()) {
+                LogUtils.info("No Folder: " + projectPath);
                 theDir.mkdirs();
+                LogUtils.info("Folder created: " + projectPath);
             }
             // Chổ này đặt tên thì truyền biến "screenName" gán cho tên File chụp màn hình
             FileHandler.copy(source, new File(projectPath + PropertiesFile.getPropValue("exportCapturePath") + "/" + screenName + "_" + dateFormat.format(new Date()) + ".png"));
-            System.out.println("Screenshot taken: " + screenName);
-            Reporter.log("Screenshot taken current URL: " + driver.getCurrentUrl(), true);
+            LogUtils.info("Screenshot taken: " + screenName);
+            LogUtils.info("Screenshot taken current URL: " + driver.getCurrentUrl());
         } catch (Exception e) {
             System.out.println("Exception while taking screenshot: " + e.getMessage());
         }
@@ -68,6 +71,7 @@ public class CaptureHelpers extends ScreenRecorder {
 
         if (!movieFolder.exists()) {
             movieFolder.mkdirs();
+            LogUtils.info("Folder created: " + movieFolder);
         } else if (!movieFolder.isDirectory()) {
             throw new IOException("\"" + movieFolder + "\" is not a directory.");
         }
@@ -77,6 +81,7 @@ public class CaptureHelpers extends ScreenRecorder {
 
     // Hàm Start record video
     public static void startRecord(String methodName) {
+        LogUtils.info("Starting record: " + methodName);
         PropertiesFile.setPropertiesFile();
         //Tạo thư mục để lưu file video vào
         File file = new File(projectPath + PropertiesFile.getPropValue("exportVideoPath") + "/" + methodName + "/");
@@ -107,6 +112,7 @@ public class CaptureHelpers extends ScreenRecorder {
     public static void stopRecord() {
         try {
             screenRecorder.stop();
+            LogUtils.info("Stop record");
         } catch (IOException e) {
             e.printStackTrace();
         }

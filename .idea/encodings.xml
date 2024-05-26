@@ -3,8 +3,8 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/java/cms/prugift/amitech/vn/admin/testcases/LoginCSV.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/src/test/resources/testData/Login.csv" charset="UTF-8" />
-    <file url="PROJECT" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/test/java/cms/prugift/amitech/vn/project/admin/testcases/LoginCSV.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/test/resources/testData/csv/Login.csv" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

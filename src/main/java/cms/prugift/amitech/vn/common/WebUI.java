@@ -1,5 +1,6 @@
 package cms.prugift.amitech.vn.common;
 
+import cms.prugift.amitech.vn.utils.LogUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -10,6 +11,7 @@ import org.testng.Assert;
 import java.time.Duration;
 import java.util.List;
 import java.util.Random;
+
 
 public class WebUI {
     private WebDriver driver;
@@ -26,6 +28,7 @@ public class WebUI {
     public void setText(By element, String value) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
         driver.findElement(element).sendKeys(value);
+        LogUtils.info("Set text " + value + " on " + element.toString());
     }
 
     public String getTextElement(By element) {
@@ -36,11 +39,13 @@ public class WebUI {
     public void clearText(By element) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
         driver.findElement(element).clear();
+        LogUtils.info("Clear text in textbox " + element.toString());
     }
 
     public void clickElement(By element) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
         driver.findElement(element).click();
+        LogUtils.info("Clicked on the element " + element.toString());
     }
 
     public boolean verifyTitle(String title) {
@@ -65,6 +70,7 @@ public class WebUI {
         WebElement toastrElement = driver.findElement(By.cssSelector(".toast-message"));
         String toastrMessage = toastrElement.getText();
         Assert.assertEquals(text, toastrMessage);
+        LogUtils.info("Verify message of an alert: " + text);
     }
 
     public boolean verifyUrl(String url) {
@@ -76,13 +82,14 @@ public class WebUI {
         setText(inputElement, elementValue);
         actions = new Actions(driver);
         actions.sendKeys(Keys.ENTER).build().perform();
+        LogUtils.info("Select element: " + inputElement);
     }
 
     public void checkSearchTableByColumn(int column, String value) {
         //Xác định số dòng của table sau khi search
         List<WebElement> row = driver.findElements(By.xpath("//table//tbody/tr"));
         int rowTotal = row.size(); //Lấy ra số dòng
-        System.out.println("Số dòng tìm thấy: " + rowTotal);
+        LogUtils.info("Number of lines found: " + rowTotal);
         //Duyệt từng dòng
         for (int i = 1; i <= rowTotal; i++) {
             WebElement elementCheck = driver.findElement(By.xpath("//table//tbody/tr[" + i + "]/td[" + column + "]"));
@@ -113,6 +120,8 @@ public class WebUI {
         String errorMsg;
         errorMsg = driver.findElement(element).getText();
         Assert.assertEquals(errorMsg, msg);
+        LogUtils.info("Get error mesage: " + msg);
+
     }
 
     public static String taoChuoiNgauNhien(int doDai) {
@@ -170,7 +179,7 @@ public class WebUI {
             wait.until(jsLoad);
             wait.until(jQueryLoad);
         } catch (Throwable error) {
-            Assert.fail("Quá thời gian load trang chờ JavaScript.");
+            Assert.fail("Page load time exceeded, waiting for JavaScript.");
         }
     }
 }
