@@ -7,7 +7,11 @@ import cms.prugift.amitech.vn.project.user.pages.HomePage;
 import cms.prugift.amitech.vn.project.user.pages.DetailProductPage;
 import cms.prugift.amitech.vn.project.user.pages.EditCartPage;
 import cms.prugift.amitech.vn.project.user.pages.LoginUserPage;
-import cms.prugift.amitech.vn.utils.listeners.ReportListener;
+import cms.prugift.amitech.vn.utils.enums.Author;
+import cms.prugift.amitech.vn.utils.enums.Browser;
+import cms.prugift.amitech.vn.utils.enums.Category;
+import cms.prugift.amitech.vn.utils.extentreport.ExtentReportListener;
+import cms.prugift.amitech.vn.utils.extentreport.TestInfo;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +20,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners(ReportListener.class)
+@Listeners(ExtentReportListener.class)
 @Epic("Function test ")
 @Feature("Login with CSV")
 public class CreateOrderTest {
@@ -32,6 +36,7 @@ public class CreateOrderTest {
 
 
     @BeforeClass
+    @TestInfo(author = Author.DEFAULT, categories = {Category.REGRESSION}, browser = Browser.EDGE)
     public void setUp() throws Exception {
         driver = new BaseSetup().setupDriver("chrome");
         webUI = new WebUI(driver);

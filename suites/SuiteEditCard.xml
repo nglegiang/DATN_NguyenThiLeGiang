@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Login">
+    <parameter name="browserType" value="edge"/>
+    <parameter name="appURL"
+               value="https://prugift.amitech.vn/"/>
+
+    <test name="Login Test">
+        <classes>
+            <class name="cms.prugift.amitech.vn.project.user.testcase.EditCartTest"></class>
+        </classes>
+    </test>
+</suite>

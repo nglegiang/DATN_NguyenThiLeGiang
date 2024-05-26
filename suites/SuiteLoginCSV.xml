@@ -6,7 +6,7 @@
 
     <test name="Login Test">
         <classes>
-            <class name="cms.prugift.amitech.vn.project.admin.testcases.LoginTest"></class>
+            <class name="cms.prugift.amitech.vn.project.admin.testcases.LoginCSV"></class>
         </classes>
     </test>
 </suite>

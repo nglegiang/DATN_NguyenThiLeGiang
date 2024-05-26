@@ -5,26 +5,26 @@ import cms.prugift.amitech.vn.utils.dataprovider.LoginDataProvider;
 import cms.prugift.amitech.vn.helpers.CaptureHelpers;
 import cms.prugift.amitech.vn.commons.BaseSetup;
 import cms.prugift.amitech.vn.project.admin.pages.LoginPage;
-import cms.prugift.amitech.vn.utils.listeners.ReportListener;
-import cms.prugift.amitech.vn.utils.listeners.TestListener;
+import cms.prugift.amitech.vn.utils.enums.Author;
+import cms.prugift.amitech.vn.utils.enums.Browser;
+import cms.prugift.amitech.vn.utils.enums.Category;
+import cms.prugift.amitech.vn.utils.extentreport.ExtentReportListener;
+import cms.prugift.amitech.vn.utils.extentreport.TestInfo;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-//
-// C:\Users\legia\Downloads\DATN_NguyenThiLeGiang\src\test\resources\testData\img\sản phẩm1.jpg@Listeners(ReportListener.class)
-//@Epic("Function test CMS")
-//@Feature("Login with CSV")
+@Listeners(ExtentReportListener.class)
 public class LoginCSV {
     private WebDriver driver;
     private LoginPage loginPage;
     private String url = "https://cms.prugift.amitech.vn/";
     private WebUI webUI;
-    ;
 
     @BeforeClass
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void setUp() throws Exception {
         CaptureHelpers.startRecord("RecordLoginCSV");
         webUI = new WebUI(driver);

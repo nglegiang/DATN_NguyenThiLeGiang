@@ -7,6 +7,10 @@ import cms.prugift.amitech.vn.project.user.pages.EditCartPage;
 import cms.prugift.amitech.vn.project.user.pages.HomePage;
 import cms.prugift.amitech.vn.project.user.pages.LoginUserPage;
 import cms.prugift.amitech.vn.helpers.ExcelHelper;
+import cms.prugift.amitech.vn.utils.enums.Author;
+import cms.prugift.amitech.vn.utils.enums.Browser;
+import cms.prugift.amitech.vn.utils.enums.Category;
+import cms.prugift.amitech.vn.utils.extentreport.TestInfo;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -25,6 +29,7 @@ public class EditCartTest {
 
 
     @BeforeClass
+    @TestInfo(author = Author.DEFAULT, categories = {Category.REGRESSION}, browser = Browser.EDGE)
     public void setUp() throws Exception {
         driver = new BaseSetup().setupDriver("edge");
         webUI = new WebUI(driver);

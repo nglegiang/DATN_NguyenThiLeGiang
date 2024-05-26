@@ -7,19 +7,18 @@ import cms.prugift.amitech.vn.project.admin.pages.CreateProductPage;
 import cms.prugift.amitech.vn.project.admin.pages.DashboardPage;
 import cms.prugift.amitech.vn.project.admin.pages.LoginPage;
 import cms.prugift.amitech.vn.project.admin.pages.ProductManagementPage;
-import cms.prugift.amitech.vn.utils.listeners.ReportListener;
-import cms.prugift.amitech.vn.utils.listeners.TestListener;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
+import cms.prugift.amitech.vn.utils.enums.Author;
+import cms.prugift.amitech.vn.utils.enums.Browser;
+import cms.prugift.amitech.vn.utils.enums.Category;
+import cms.prugift.amitech.vn.utils.extentreport.ExtentReportListener;
+import cms.prugift.amitech.vn.utils.extentreport.TestInfo;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
-@Listeners(ReportListener.class)
-@Epic("Function test CMS")
-@Feature("Create Product")
+@Listeners(ExtentReportListener.class)
 public class CreateProductTest {
     private WebDriver driver;
     WebUI webUI;
@@ -32,6 +31,7 @@ public class CreateProductTest {
 
 
     @BeforeClass
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void setUp() throws Exception {
         driver = new BaseSetup().setupDriver("chrome");
         webUI = new WebUI(driver);

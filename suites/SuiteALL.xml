@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression Test">
+    <suite-files>
+        <suite-file path="/suites/SuiteLogin.xml"/>
+        <suite-file path="/suites/SuiteLoginCSV.xml"/>
+        <suite-file path="/suites/SuiteAddProductTest.xml"/>
+        <suite-file path="/suites/SuiteEditCard.xml"/>
+        <suite-file path="/suites/SuiteCreateOrder.xml"/>
+    </suite-files>
+</suite>

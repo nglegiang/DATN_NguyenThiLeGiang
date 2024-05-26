@@ -5,27 +5,33 @@ import cms.prugift.amitech.vn.helpers.CaptureHelpers;
 import cms.prugift.amitech.vn.helpers.ExcelHelper;
 import cms.prugift.amitech.vn.commons.BaseSetup;
 import cms.prugift.amitech.vn.project.admin.pages.LoginPage;
-import cms.prugift.amitech.vn.utils.listeners.ReportListener;
+import cms.prugift.amitech.vn.utils.enums.Author;
+import cms.prugift.amitech.vn.utils.enums.Browser;
+import cms.prugift.amitech.vn.utils.enums.Category;
+import cms.prugift.amitech.vn.utils.extentreport.ExtentReportListener;
+import cms.prugift.amitech.vn.utils.extentreport.TestInfo;
 import cms.prugift.amitech.vn.utils.LogUtils;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-@Listeners(ReportListener.class)
-@Epic("Function test CMS")
-@Feature("Login with XSTL")
+@Listeners(ExtentReportListener.class)
 public class LoginTest {
-    private WebDriver driver;
+    private static WebDriver driver;
     private LoginPage loginPage;
     private String url = "https://cms.prugift.amitech.vn/";
     private ExcelHelper excelHelper = new ExcelHelper();
     private WebUI webUI;
+    private static ExtentReports extent;
+    private ExtentTest extentTest;
 
     @BeforeClass
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void setUp() throws Exception {
         driver = new BaseSetup().setupDriver("chrome");
+        CaptureHelpers.startRecord("Login");
         webUI = new WebUI(driver);
         excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "Login");
     }
