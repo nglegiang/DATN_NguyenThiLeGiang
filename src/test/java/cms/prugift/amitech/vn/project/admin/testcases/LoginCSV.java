@@ -5,12 +5,18 @@ import cms.prugift.amitech.vn.utils.dataprovider.LoginDataProvider;
 import cms.prugift.amitech.vn.helpers.CaptureHelpers;
 import cms.prugift.amitech.vn.commons.BaseSetup;
 import cms.prugift.amitech.vn.project.admin.pages.LoginPage;
+import cms.prugift.amitech.vn.utils.listeners.ReportListener;
 import cms.prugift.amitech.vn.utils.listeners.TestListener;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-@Listeners(TestListener.class)
+//
+// C:\Users\legia\Downloads\DATN_NguyenThiLeGiang\src\test\resources\testData\img\sản phẩm1.jpg@Listeners(ReportListener.class)
+//@Epic("Function test CMS")
+//@Feature("Login with CSV")
 public class LoginCSV {
     private WebDriver driver;
     private LoginPage loginPage;

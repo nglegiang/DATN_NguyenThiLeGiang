@@ -1,12 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Login">
-    <parameter name="browserType" value="chrome" />
+    <parameter name="browserType" value="chrome"/>
     <parameter name="appURL"
-               value="https://cms.prugift.amitech.vn/" />
+               value="https://cms.prugift.amitech.vn/"/>
 
     <test name="Login Test">
         <classes>
-            <class name="cms.prugift.amitech.vn.admin.testcases.LoginTest">
+            <class name="cms.prugift.amitech.vn.project.admin.testcases.LoginTest">
             </class>
         </classes>
     </test>

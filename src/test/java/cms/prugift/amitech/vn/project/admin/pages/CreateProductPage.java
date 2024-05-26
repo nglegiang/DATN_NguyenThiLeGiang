@@ -124,7 +124,7 @@ public class CreateProductPage {
 
 
     public void verifyRequiredFields() throws Exception {
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "AddProduct");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "AddProduct");
         webUI.waitForPageLoaded();
         webUI.clickElement(buttonSave);
         verifyMsgRequiredFields();
@@ -133,14 +133,14 @@ public class CreateProductPage {
     }
 
     public void verifyCategoryName() throws Exception {
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "AddUsesAndCategory");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "AddUsesAndCategory");
         webUI.clickElement(btnAddCategory);
         webUI.clickElement(btnSaveName);
         webUI.verifyElemenText(verifyNameUses, excelHelper.getCellData("category", 1));
     }
 
     public void addCategory() throws Exception {
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "AddUsesAndCategory");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "AddUsesAndCategory");
         webUI.waitForPageLoaded();
         webUI.clickElement(btnAddCategory);
         String name = excelHelper.getCellData("category", 2);
@@ -160,7 +160,7 @@ public class CreateProductPage {
 
     public void addCategoryAlreadyExist() throws Exception {
         webUI.waitForPageLoaded();
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "AddUsesAndCategory");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "AddUsesAndCategory");
         webUI.clickElement(btnAddCategory);
         webUI.setText(inputNameCategory, excelHelper.getCellData("category", 2));
         webUI.clickElement(btnSaveName);
@@ -169,7 +169,7 @@ public class CreateProductPage {
     }
 
     public void verifyUsesName() throws Exception {
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "AddUsesAndCategory");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "AddUsesAndCategory");
         webUI.clickElement(buttonAddUses);
         webUI.clickElement(btnSaveName);
         webUI.verifyElemenText(verifyNameUses, excelHelper.getCellData("uses", 1));
@@ -177,7 +177,7 @@ public class CreateProductPage {
     }
 
     public void addUses() throws Exception {
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "AddUsesAndCategory");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "AddUsesAndCategory");
         webUI.waitForPageLoaded();
         String name = excelHelper.getCellData("uses", 2);
         webUI.clickElement(buttonAddUses);
@@ -190,7 +190,7 @@ public class CreateProductPage {
     }
 
     public void addUsesAlreadyExist() throws Exception {
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "AddUsesAndCategory");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "AddUsesAndCategory");
         webUI.waitForPageLoaded();
         webUI.clickElement(buttonAddUses);
         webUI.setText(inputNameUses, excelHelper.getCellData("uses", 2));
@@ -216,7 +216,7 @@ public class CreateProductPage {
         webUI.selectElement(selectCategory, inputCategory, "Văn phòng - công sở");
         webUI.setText(inputInventoryHN, "-1");
         webUI.setText(inputWarehouseCodeHN, "KHO-HN");
-        String filePath = "C:\\Users\\legia\\Downloads\\DATN_NguyenThiLeGiang\\src\\test\\resources\\testData\\sản phẩm1.jpg";
+        String filePath = "D:\\DATN\\DATN\\DATN_NguyenThiLeGiang\\src\\test\\resources\\testData\\img\\sản phẩm1.jpg";
         uploadImg(uploadMainImg, filePath);
         Assert.assertTrue(webUI.verifyElemenText(verifyUploadImg, "Cắt ảnh"), "Upload img không thành công");
         webUI.clickElement(buttonSaveImg);
@@ -272,7 +272,7 @@ public class CreateProductPage {
         webUI.setText(inputNameProduct, "PRU01");
         webUI.selectElement(selectUses, inputSearchUses, "Quà tặng nhân viên");
         webUI.selectElement(selectCategory, inputCategory, "Văn phòng - công sở");
-        String filePath = "C:\\Users\\legia\\Downloads\\DATN_NguyenThiLeGiang\\src\\test\\resources\\testData\\sản phẩm1.jpg";
+        String filePath = "D:\\DATN\\DATN\\DATN_NguyenThiLeGiang\\src\\test\\resources\\testData\\img\\sản phẩm1.jpg";
         uploadImg(uploadMainImg, filePath);
         Assert.assertTrue(webUI.verifyElemenText(verifyUploadImg, "Cắt ảnh"), "Upload img không thành công");
         webUI.clickElement(buttonSaveImg);
@@ -320,7 +320,7 @@ public class CreateProductPage {
         webUI.setText(inputPriceGroupType22, "0");
 
         //upload img
-        String filePath = "C:\\Users\\legia\\Downloads\\DATN_NguyenThiLeGiang\\src\\test\\resources\\testData\\img\\sản phẩm1.jpg";
+        String filePath = "D:\\DATN\\DATN\\DATN_NguyenThiLeGiang\\src\\test\\resources\\testData\\img\\sản phẩm1.jpg";
         uploadImg(uploadMainImg, filePath);
         Assert.assertTrue(webUI.verifyElemenText(verifyUploadImg, "Cắt ảnh"), "Upload img không thành công");
         webUI.clickElement(buttonSaveImg);
@@ -381,12 +381,6 @@ public class CreateProductPage {
         }
         StringSelection str = new StringSelection(filePath);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(str, null);
-//        robot.keyPress(KeyEvent.VK_CONTROL);
-//        robot.keyPress(KeyEvent.VK_V);
-//        robot.keyRelease(KeyEvent.VK_CONTROL);
-//        robot.keyRelease(KeyEvent.VK_V);
-//        robot.keyPress(KeyEvent.VK_ENTER);
-//        robot.keyRelease(KeyEvent.VK_ENTER);
 
         // Nhấn phím Enter để mở hộp thoại chọn tệp
         robot.keyPress(KeyEvent.VK_ENTER);

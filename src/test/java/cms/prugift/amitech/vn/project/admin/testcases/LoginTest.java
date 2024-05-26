@@ -5,26 +5,28 @@ import cms.prugift.amitech.vn.helpers.CaptureHelpers;
 import cms.prugift.amitech.vn.helpers.ExcelHelper;
 import cms.prugift.amitech.vn.commons.BaseSetup;
 import cms.prugift.amitech.vn.project.admin.pages.LoginPage;
-import cms.prugift.amitech.vn.utils.listeners.TestListener;
+import cms.prugift.amitech.vn.utils.listeners.ReportListener;
 import cms.prugift.amitech.vn.utils.LogUtils;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
 
-@Listeners(TestListener.class)
+@Listeners(ReportListener.class)
+@Epic("Function test CMS")
+@Feature("Login with XSTL")
 public class LoginTest {
     private WebDriver driver;
     private LoginPage loginPage;
     private String url = "https://cms.prugift.amitech.vn/";
     private ExcelHelper excelHelper = new ExcelHelper();
     private WebUI webUI;
-    ;
 
     @BeforeClass
     public void setUp() throws Exception {
-        CaptureHelpers.startRecord("RecordLoginTest");
-        webUI = new WebUI(driver);
         driver = new BaseSetup().setupDriver("chrome");
+        webUI = new WebUI(driver);
         excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "Login");
     }
 

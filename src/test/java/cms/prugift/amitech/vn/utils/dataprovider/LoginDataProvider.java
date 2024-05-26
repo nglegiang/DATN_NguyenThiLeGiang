@@ -13,7 +13,7 @@ public class LoginDataProvider {
     public Object[][] readCSVData() throws Exception {
         String[][] testData;
         //Get the workbook
-        Reader fileInputStream = new FileReader("src/test/resources/testData/Login.csv");
+        Reader fileInputStream = new FileReader("src/test/resources/testData/csv/Login.csv");
         Iterable<CSVRecord> records = CSVFormat.EXCEL.parse(fileInputStream);
         int numberOfRecords = 0;
         int numberOfColumns = 0;

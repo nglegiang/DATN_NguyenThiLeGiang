@@ -7,11 +7,18 @@ import cms.prugift.amitech.vn.project.user.pages.HomePage;
 import cms.prugift.amitech.vn.project.user.pages.DetailProductPage;
 import cms.prugift.amitech.vn.project.user.pages.EditCartPage;
 import cms.prugift.amitech.vn.project.user.pages.LoginUserPage;
+import cms.prugift.amitech.vn.utils.listeners.ReportListener;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners(ReportListener.class)
+@Epic("Function test ")
+@Feature("Login with CSV")
 public class CreateOrderTest {
     private WebDriver driver;
     WebUI webUI;

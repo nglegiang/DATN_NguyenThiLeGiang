@@ -6,7 +6,7 @@
 
     <test name="Add product test">
         <classes>
-            <class name="cms.prugift.amitech.vn.admin.testcases.CreateProductTest">
+            <class name="cms.prugift.amitech.vn.project.admin.testcases.CreateProductTest">
             </class>
         </classes>
     </test>

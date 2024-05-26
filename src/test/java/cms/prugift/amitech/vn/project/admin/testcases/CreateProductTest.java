@@ -7,16 +7,24 @@ import cms.prugift.amitech.vn.project.admin.pages.CreateProductPage;
 import cms.prugift.amitech.vn.project.admin.pages.DashboardPage;
 import cms.prugift.amitech.vn.project.admin.pages.LoginPage;
 import cms.prugift.amitech.vn.project.admin.pages.ProductManagementPage;
+import cms.prugift.amitech.vn.utils.listeners.ReportListener;
+import cms.prugift.amitech.vn.utils.listeners.TestListener;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+@Listeners(ReportListener.class)
+@Epic("Function test CMS")
+@Feature("Create Product")
 public class CreateProductTest {
     private WebDriver driver;
     WebUI webUI;
     private LoginPage loginPage;
-    private ExcelHelper excelHelper;
+    private ExcelHelper excelHelper = new ExcelHelper();
     private ProductManagementPage productManagementPage;
     private DashboardPage dashboardPage;
     private CreateProductPage createProductPage;
@@ -27,7 +35,7 @@ public class CreateProductTest {
     public void setUp() throws Exception {
         driver = new BaseSetup().setupDriver("chrome");
         webUI = new WebUI(driver);
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "Login");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "Login");
     }
 
     @Test(priority = 1)
@@ -94,7 +102,7 @@ public class CreateProductTest {
         driver.get(url);
         if (webUI.verifyTitle("Đăng nhập | Quản trị PruGift")) {
             loginPage = new LoginPage(driver);
-            dashboardPage = loginPage.loginAdminSuccsess(excelHelper.getCellData("username", 1), excelHelper.getCellData("password", 1));
+            dashboardPage = loginPage.loginAdminSuccsess(excelHelper.getCellData("username", 6), excelHelper.getCellData("password", 6));
         } else {
             dashboardPage = new DashboardPage(driver);
         }

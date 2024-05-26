@@ -4,17 +4,23 @@ import cms.prugift.amitech.vn.utils.LogUtils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.*;
 
 import java.time.Duration;
+import java.util.concurrent.TimeUnit;
 
 public class BaseSetup {
-    public static WebDriver driver;
+
+    private static WebDriver driver;
+    private String url = "https://cms.prugift.amitech.vn/";
 
     public static WebDriver getDriver() {
         return driver;
+    }
+
+    public String getUrl() {
+        return url;
     }
 
     public WebDriver setupDriver(String browserType) {
@@ -32,54 +38,52 @@ public class BaseSetup {
         return driver;
     }
 
-    private WebDriver initChromeDriver() {
-        LogUtils.info("Launching Chrome browser...");
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(30));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-        return driver;
-    }
-
-    private WebDriver initEdgeDriver() {
-        LogUtils.info("Launching Edge browser...");
-        WebDriverManager.edgedriver().setup();
-        driver = new EdgeDriver();
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(30));
-        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(60));
-        return driver;
-    }
-
-
+    // Hàm này để tùy chọn Browser. Cho chạy trước khi gọi class này (BeforeClass)
     private void setDriver(String browserType, String appURL) {
         switch (browserType) {
             case "chrome":
                 driver = initChromeDriver();
                 driver.navigate().to(appURL);
                 break;
-            case "edg":
+            case "edge":
                 driver = initEdgeDriver();
                 driver.navigate().to(appURL);
                 break;
             default:
-                LogUtils.error("Browser " + browserType + " not supported. Launching Chrome as browser of choice...");
+                LogUtils.error("Browser: " + browserType + " is invalid, Launching Chrome as browser of choice...");
                 driver = initChromeDriver();
-
         }
     }
 
+    // Khởi tạo cấu hình của các Browser để đưa vào Switch Case
+
+    private WebDriver initChromeDriver() {
+        System.out.println("Launching Chrome browser...");
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        return driver;
+    }
+
+    private WebDriver initEdgeDriver() {
+        System.out.println("Launching Edge browser...");
+        WebDriverManager.edgedriver().setup();
+        driver = new EdgeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+        return driver;
+    }
 
     // Chạy hàm initializeTestBaseSetup trước hết khi class này được gọi
-    @Parameters({"browserType", "appURL"})
+    @Parameters({"browserType", "webURL"})
     @BeforeClass
-    public void initializeTestBaseSetup(String browserType, String appURL) {
+    public void initializeTestBaseSetup(String browserType, String webURL) {
         try {
-            // Khởi tạo driver và browser
-            setDriver(browserType, appURL);
+            // Khởi tạo driver và tùy chọn browser và web url
+            setDriver(browserType, webURL);
         } catch (Exception e) {
             System.out.println("Error..." + e.getStackTrace());
         }
@@ -87,8 +91,9 @@ public class BaseSetup {
 
     @AfterClass
     public void tearDown() throws Exception {
-        Thread.sleep(2000);
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
 }
