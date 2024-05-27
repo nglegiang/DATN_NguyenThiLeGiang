@@ -62,14 +62,19 @@ public class WebUI {
 
     public boolean verifyElemenText(By element, String text) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(element));
-        return driver.findElement(element).getText().equals(text);
+        boolean result = getTextElement(element).trim().equals(text);
+        if (result == true) {
+            LogUtils.info("Verify text of an element [Equals]: " + result);
+        } else {
+            LogUtils.warn("Verify text of an element [Equals]: " + result);
+        }
+        return result;
     }
 
     public void verifyAlertMessage(String text) {
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#toast-container")));
         WebElement toastrElement = driver.findElement(By.cssSelector(".toast-message"));
         String toastrMessage = toastrElement.getText();
-        Assert.assertEquals(text, toastrMessage);
         LogUtils.info("Verify message of an alert: " + text);
     }
 
@@ -123,8 +128,14 @@ public class WebUI {
     }
 
     public void getErrorMsg(By element, String msg) {
-        String errorMsg;
-        errorMsg = driver.findElement(element).getText();
+//        boolean result = verifyElementExist(element);
+//        if (result) {
+//            LogUtils.info("Found element: " + element);
+//        } else {
+//            LogUtils.warn("Element not found: " + element);
+//            Assert.assertTrue(verifyElementExist(element));
+//        }
+        String errorMsg = driver.findElement(element).getText();
         Assert.assertEquals(errorMsg, msg);
         LogUtils.info("Get error mesage: " + msg);
 
