@@ -14,6 +14,9 @@ public class HomePage {
 
     private By inputSearch = By.cssSelector("input[placeholder='Tìm kiếm sản phẩm']");
     private By iconSearch = By.cssSelector(".fa.fa-search.btn-color-default");
+    private By card = By.cssSelector("div[id='cartCount'] span[class='header-text-color-cart']");
+    private By checkAll = By.cssSelector("label[for='shopping-checkbox-check-all']");
+    private By btnPayment = By.cssSelector(".btn.btn-next.btn-default");
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -36,6 +39,15 @@ public class HomePage {
             }
         }
         throw new NoSuchElementException("No product found with the keyword: " + keyword);
+    }
+
+    public OderProductPage openPaymentPage() {
+        webUI.clickElement(card);
+        webUI.clickElement(checkAll);
+        webUI.clickElement(btnPayment);
+        webUI.sleep(3);
+        webUI.verifyTitle("Thanh toán - PRUGift");
+        return new OderProductPage(driver);
     }
 
 }

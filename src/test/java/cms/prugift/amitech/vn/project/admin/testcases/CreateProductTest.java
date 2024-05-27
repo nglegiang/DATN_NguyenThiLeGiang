@@ -31,7 +31,6 @@ public class CreateProductTest {
 
 
     @BeforeClass
-    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void setUp() throws Exception {
         driver = new BaseSetup().setupDriver("chrome");
         webUI = new WebUI(driver);
@@ -39,60 +38,70 @@ public class CreateProductTest {
     }
 
     @Test(priority = 1)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void verifyRequiredFields() throws Exception {
         openAddProductPage();
         createProductPage.verifyRequiredFields();
     }
 
     @Test(priority = 2)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void verifyUsesName() throws Exception {
         openAddProductPage();
         createProductPage.verifyUsesName();
     }
 
     @Test(priority = 3)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void addUses() throws Exception {
         openAddProductPage();
         createProductPage.addUses();
     }
 
     @Test(priority = 4)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void addUsesAlreadyExist() throws Exception {
         openAddProductPage();
         createProductPage.addUsesAlreadyExist();
     }
 
     @Test(priority = 5)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void deleteUses() throws Exception {
         openAddProductPage();
         createProductPage.deleteUses();
     }
 
     @Test(priority = 6)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void verifyCatogeryName() throws Exception {
         openAddProductPage();
         createProductPage.verifyCategoryName();
     }
 
     @Test(priority = 7)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void addCategory() throws Exception {
         openAddProductPage();
         createProductPage.addCategory();
     }
 
     @Test(priority = 8)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void addCategoryAlreadyExist() throws Exception {
         openAddProductPage();
         createProductPage.addCategoryAlreadyExist();
     }
 
     @Test(priority = 9)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void createProduct() throws Exception {
         openAddProductPage();
         createProductPage.createProduct();
     }
 
     @Test(priority = 10)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void createProductFailWithIdAlreadyExist() throws Exception {
         openAddProductPage();
         createProductPage.createProductFailWithIdAlreadyExist();

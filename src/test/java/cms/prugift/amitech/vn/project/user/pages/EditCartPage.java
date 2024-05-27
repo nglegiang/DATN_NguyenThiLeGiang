@@ -24,6 +24,7 @@ public class EditCartPage {
     private By quantityMax = By.xpath("(//span[@class='product-amount-group-quantity-in-stock'])[3]");
     private By btnPayment = By.cssSelector(".btn.btn-next.btn-default");
     private By title = By.cssSelector(".shopping-card__title");
+    private By card = By.cssSelector("div[id='cartCount'] span[class='header-text-color-cart']");
 
     public EditCartPage(WebDriver driver) {
         this.driver = driver;
@@ -31,7 +32,9 @@ public class EditCartPage {
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
+
     public void openPaymentPageSuccess() {
+        webUI.clickElement(card);
         webUI.clickElement(checkAll);
         webUI.clickElement(btnPayment);
         webUI.sleep(3);
@@ -39,13 +42,13 @@ public class EditCartPage {
     }
 
     public void openPaymentPageFailWithNotChooseProduct() throws Exception {
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "EditCart");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "EditCart");
         webUI.clickElement(btnPayment);
         webUI.verifyAlertMessage(excelHelper.getCellData("msg", 3));
     }
 
     public void enterQuantityEmpty() throws Exception {
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "EditCart");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "EditCart");
         webUI.clickElement(checkAll);
         webUI.clearText(inputQuantity);
         webUI.setText(inputQuantity, " ");
@@ -62,7 +65,7 @@ public class EditCartPage {
     }
 
     public void verifyMinValue() throws Exception {
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "EditCart");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "EditCart");
         webUI.clickElement(checkAll);
         webUI.clearText(inputQuantity);
         webUI.setText(inputQuantity, "0");
@@ -71,7 +74,7 @@ public class EditCartPage {
     }
 
     public void checkEnterNegativeValue() throws Exception {
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "EditCart");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "EditCart");
         webUI.clickElement(checkAll);
         webUI.clearText(inputQuantity);
         webUI.setText(inputQuantity, "-1");
@@ -80,7 +83,7 @@ public class EditCartPage {
     }
 
     public void verifyLimitValue() throws Exception {
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "EditCart");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "EditCart");
         webUI.clickElement(checkAll);
         // Xác định số lượng tồn kho
         WebElement quantityElement = driver.findElement(quantityMax);

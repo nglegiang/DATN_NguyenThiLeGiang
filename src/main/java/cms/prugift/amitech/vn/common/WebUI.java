@@ -85,6 +85,12 @@ public class WebUI {
         LogUtils.info("Select element: " + inputElement);
     }
 
+    public void selectCbb(By element) {
+        clickElement(element);
+        actions = new Actions(driver);
+        actions.sendKeys(Keys.ENTER).build().perform();
+    }
+
     public void checkSearchTableByColumn(int column, String value) {
         //Xác định số dòng của table sau khi search
         List<WebElement> row = driver.findElements(By.xpath("//table//tbody/tr"));

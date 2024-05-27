@@ -28,7 +28,6 @@ public class LoginTest {
     private ExtentTest extentTest;
 
     @BeforeClass
-    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void setUp() throws Exception {
         driver = new BaseSetup().setupDriver("chrome");
         CaptureHelpers.startRecord("Login");
@@ -37,6 +36,7 @@ public class LoginTest {
     }
 
     @Test(priority = 1)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void loginFailWithUsernameNull() throws Exception {
         loginPage = new LoginPage(driver);
         driver.get(url);
@@ -46,6 +46,7 @@ public class LoginTest {
     }
 
     @Test(priority = 2)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void loginFailWithUsernameDoesNotExist() throws Exception {
         loginPage = new LoginPage(driver);
         driver.get(url);
@@ -54,6 +55,7 @@ public class LoginTest {
     }
 
     @Test(priority = 3)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void loginFailWithPasswordNull() throws Exception {
         loginPage = new LoginPage(driver);
         driver.get(url);
@@ -62,6 +64,7 @@ public class LoginTest {
     }
 
     @Test(priority = 4)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void testHideAndUnHidePassword() throws Exception {
         loginPage = new LoginPage(driver);
         driver.get(url);
@@ -70,6 +73,7 @@ public class LoginTest {
     }
 
     @Test(priority = 5)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void loginFailWithIncorrectPassword() throws Exception {
         loginPage = new LoginPage(driver);
         driver.get(url);
@@ -78,6 +82,7 @@ public class LoginTest {
     }
 
     @Test(priority = 6)
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void loginAdminSuccsess() throws Exception {
         LogUtils.info("Run test case: loginAdminSuccsess");
         loginPage = new LoginPage(driver);

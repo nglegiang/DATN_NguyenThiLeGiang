@@ -29,50 +29,56 @@ public class EditCartTest {
 
 
     @BeforeClass
-    @TestInfo(author = Author.DEFAULT, categories = {Category.REGRESSION}, browser = Browser.EDGE)
     public void setUp() throws Exception {
         driver = new BaseSetup().setupDriver("edge");
         webUI = new WebUI(driver);
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "Login");
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "Login");
     }
 
     @Test(priority = 1)
+    @TestInfo(author = Author.DEFAULT, categories = {Category.REGRESSION}, browser = Browser.EDGE)
     public void openPaymentPageFailWithNotChooseProduct() throws Exception {
         openCart();
         editCartPage.openPaymentPageFailWithNotChooseProduct();
     }
 
     @Test(priority = 2)
+    @TestInfo(author = Author.DEFAULT, categories = {Category.REGRESSION}, browser = Browser.EDGE)
     public void enterQuantityEmpty() throws Exception {
         openCart();
         editCartPage.enterQuantityEmpty();
     }
 
     @Test(priority = 3)
+    @TestInfo(author = Author.DEFAULT, categories = {Category.REGRESSION}, browser = Browser.EDGE)
     public void enterQuantityWithOrtherCharacters() throws Exception {
         openCart();
         editCartPage.enterQuantityWithOrtherCharacters();
     }
 
     @Test(priority = 4)
+    @TestInfo(author = Author.DEFAULT, categories = {Category.REGRESSION}, browser = Browser.EDGE)
     public void verifyMinValue() throws Exception {
         openCart();
         editCartPage.verifyMinValue();
     }
 
     @Test(priority = 5)
+    @TestInfo(author = Author.DEFAULT, categories = {Category.REGRESSION}, browser = Browser.EDGE)
     public void verifyLimitValue() throws Exception {
         openCart();
         editCartPage.verifyLimitValue();
     }
 
     @Test(priority = 6)
+    @TestInfo(author = Author.DEFAULT, categories = {Category.REGRESSION}, browser = Browser.EDGE)
     public void checkEnterNegativeValue() throws Exception {
         openCart();
         editCartPage.checkEnterNegativeValue();
     }
 
     @Test(priority = 7)
+    @TestInfo(author = Author.DEFAULT, categories = {Category.REGRESSION}, browser = Browser.EDGE)
     public void openPaymentPageSuccess() throws Exception {
         openCart();
         editCartPage.openPaymentPageSuccess();

@@ -3,17 +3,13 @@ package cms.prugift.amitech.vn.project.user.testcase;
 import cms.prugift.amitech.vn.helpers.ExcelHelper;
 import cms.prugift.amitech.vn.common.WebUI;
 import cms.prugift.amitech.vn.commons.BaseSetup;
-import cms.prugift.amitech.vn.project.user.pages.HomePage;
-import cms.prugift.amitech.vn.project.user.pages.DetailProductPage;
-import cms.prugift.amitech.vn.project.user.pages.EditCartPage;
-import cms.prugift.amitech.vn.project.user.pages.LoginUserPage;
+import cms.prugift.amitech.vn.project.user.pages.*;
+import cms.prugift.amitech.vn.utils.dataprovider.CreateOrderProvider;
 import cms.prugift.amitech.vn.utils.enums.Author;
 import cms.prugift.amitech.vn.utils.enums.Browser;
 import cms.prugift.amitech.vn.utils.enums.Category;
 import cms.prugift.amitech.vn.utils.extentreport.ExtentReportListener;
 import cms.prugift.amitech.vn.utils.extentreport.TestInfo;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -21,8 +17,6 @@ import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 @Listeners(ExtentReportListener.class)
-@Epic("Function test ")
-@Feature("Login with CSV")
 public class CreateOrderTest {
     private WebDriver driver;
     WebUI webUI;
@@ -30,25 +24,38 @@ public class CreateOrderTest {
     private HomePage homePage;
     private DetailProductPage detailProductPage;
     private EditCartPage editCartPage;
+    private OderProductPage orderProductPage;
     private ExcelHelper excelHelper = new ExcelHelper();
     ;
     private String url = "https://prugift.amitech.vn/";
 
 
     @BeforeClass
-    @TestInfo(author = Author.DEFAULT, categories = {Category.REGRESSION}, browser = Browser.EDGE)
-    public void setUp() throws Exception {
-        driver = new BaseSetup().setupDriver("chrome");
+    public void setUp() {
+        driver = new BaseSetup().setupDriver("edge");
         webUI = new WebUI(driver);
-        excelHelper.setExcelFile("src/test/resources/testData/DataTest.xlsx", "CreateOrder");
     }
 
-    @Test
-    public void verifyNewAddress() throws Exception {
-
+    @Test(dataProviderClass = CreateOrderProvider.class, dataProvider = "create-order-csv")
+    @TestInfo(author = Author.DEFAULT, categories = {Category.REGRESSION}, browser = Browser.EDGE)
+    public void createOrderTest(String[] data) throws Exception {
+        openCart();
+        String name = data[1];
+        String phone = data[2];
+        String email = data[3];
+        String province = data[4];
+        String district = data[5];
+        String wards = data[6];
+        String detailAddress = data[7];
+        String poNumber = data[8];
+        String poFile = data[9];
+        String element = data[10];
+        String msg = data[11];
+        orderProductPage.createOrder(name, phone, email, province, district, wards, detailAddress, poNumber, poFile, element, msg);
     }
 
     public void openCart() throws Exception {
+        excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "Login");
         driver.get(url);
         if (webUI.verifyTitle("Đăng nhập - PRUGift")) {
             loginUserPage = new LoginUserPage(driver);
@@ -56,8 +63,7 @@ public class CreateOrderTest {
         } else {
             homePage = new HomePage(driver);
         }
-        detailProductPage = homePage.openDetailProduct("Túi xách thời trang");
-        editCartPage = detailProductPage.openEditCart();
+        orderProductPage = homePage.openPaymentPage();
     }
 
     @AfterClass

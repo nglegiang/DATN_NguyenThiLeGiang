@@ -24,7 +24,6 @@ public class LoginCSV {
     private WebUI webUI;
 
     @BeforeClass
-    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void setUp() throws Exception {
         CaptureHelpers.startRecord("RecordLoginCSV");
         webUI = new WebUI(driver);
@@ -32,6 +31,7 @@ public class LoginCSV {
     }
 
     @Test(dataProviderClass = LoginDataProvider.class, dataProvider = "login-data-csv")
+    @TestInfo(author = Author.LEGIANG, categories = {Category.REGRESSION}, browser = Browser.CHROME)
     public void testLoginData(String[] loginData) {
         String username = loginData[1];
         String password = loginData[2];
