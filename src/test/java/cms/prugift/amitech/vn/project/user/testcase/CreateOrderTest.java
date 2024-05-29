@@ -1,5 +1,6 @@
 package cms.prugift.amitech.vn.project.user.testcase;
 
+import cms.prugift.amitech.vn.helpers.CaptureHelpers;
 import cms.prugift.amitech.vn.helpers.ExcelHelper;
 import cms.prugift.amitech.vn.common.WebUI;
 import cms.prugift.amitech.vn.commons.BaseSetup;
@@ -11,10 +12,8 @@ import cms.prugift.amitech.vn.utils.enums.Category;
 import cms.prugift.amitech.vn.utils.extentreport.ExtentReportListener;
 import cms.prugift.amitech.vn.utils.extentreport.TestInfo;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 
 @Listeners(ExtentReportListener.class)
 public class CreateOrderTest {
@@ -32,6 +31,7 @@ public class CreateOrderTest {
 
     @BeforeClass
     public void setUp() {
+        CaptureHelpers.startRecord("Record CreateOrderProduct");
         driver = new BaseSetup().setupDriver("edge");
         webUI = new WebUI(driver);
     }
@@ -66,8 +66,21 @@ public class CreateOrderTest {
         orderProductPage = homePage.openPaymentPage();
     }
 
+    @AfterMethod
+    public void takeScreenshot(ITestResult result) {
+        // passed = SUCCESS v� failed = FAILURE
+        if (ITestResult.FAILURE == result.getStatus()) {
+            try {
+                CaptureHelpers.captureScreenshot(driver, result.getName());
+            } catch (Exception e) {
+                System.out.println("Exception while taking screenshot " + e.getMessage());
+            }
+        }
+    }
+
     @AfterClass
     public void tearDown() {
+        CaptureHelpers.stopRecord();
         driver.quit();
     }
 }

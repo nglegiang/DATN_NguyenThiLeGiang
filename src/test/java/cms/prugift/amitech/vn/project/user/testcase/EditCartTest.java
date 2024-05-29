@@ -2,6 +2,7 @@ package cms.prugift.amitech.vn.project.user.testcase;
 
 import cms.prugift.amitech.vn.common.WebUI;
 import cms.prugift.amitech.vn.commons.BaseSetup;
+import cms.prugift.amitech.vn.helpers.CaptureHelpers;
 import cms.prugift.amitech.vn.project.user.pages.DetailProductPage;
 import cms.prugift.amitech.vn.project.user.pages.EditCartPage;
 import cms.prugift.amitech.vn.project.user.pages.HomePage;
@@ -11,8 +12,12 @@ import cms.prugift.amitech.vn.utils.enums.Author;
 import cms.prugift.amitech.vn.utils.enums.Browser;
 import cms.prugift.amitech.vn.utils.enums.Category;
 import cms.prugift.amitech.vn.utils.extentreport.TestInfo;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -30,6 +35,7 @@ public class EditCartTest {
 
     @BeforeClass
     public void setUp() throws Exception {
+        CaptureHelpers.startRecord("Record EditCart");
         driver = new BaseSetup().setupDriver("edge");
         webUI = new WebUI(driver);
         excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "Login");
@@ -92,13 +98,30 @@ public class EditCartTest {
         } else {
             homePage = new HomePage(driver);
         }
-        detailProductPage = homePage.openDetailProduct("Túi xách thời trang");
-        editCartPage = detailProductPage.openEditCart();
+        WebElement numberCart = driver.findElement(By.id("cartCount"));
+        if (Integer.parseInt(numberCart.getAttribute("data-count")) > 0) {
+            editCartPage = homePage.openCart();
+        } else {
+            detailProductPage = homePage.openDetailProduct("Túi xách thời trang");
+            editCartPage = detailProductPage.openEditCart();
+        }
     }
 
+    @AfterMethod
+    public void takeScreenshot(ITestResult result) {
+        // passed = SUCCESS v� failed = FAILURE
+        if (ITestResult.FAILURE == result.getStatus()) {
+            try {
+                CaptureHelpers.captureScreenshot(driver, result.getName());
+            } catch (Exception e) {
+                System.out.println("Exception while taking screenshot " + e.getMessage());
+            }
+        }
+    }
 
     @AfterClass
     public void tearDown() {
+        CaptureHelpers.stopRecord();
         driver.quit();
     }
 }

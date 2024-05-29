@@ -1,6 +1,7 @@
 package cms.prugift.amitech.vn.project.user.pages;
 
 import cms.prugift.amitech.vn.common.WebUI;
+import cms.prugift.amitech.vn.project.user.testcase.EditCartTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -48,6 +49,11 @@ public class HomePage {
         webUI.sleep(3);
         webUI.verifyTitle("Thanh toán - PRUGift");
         return new OderProductPage(driver);
+    }
+
+    public EditCartPage openCart() {
+        webUI.clickElement(card);
+        return new EditCartPage(driver);
     }
 
 }

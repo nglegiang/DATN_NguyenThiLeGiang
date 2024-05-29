@@ -56,7 +56,7 @@ public class OderProductPage {
     private By inputPrFile = By.xpath("//input[@name='prFile']");
     private By verifyPrFile = By.xpath("/html[1]/body[1]/main[1]/section[3]/div[1]/div[4]/div[1]/div[1]/div[2]/div[1]/div[2]/span[1]");
     private By btnNextPage = By.cssSelector(".btn.btn-next.btn-default");
-    private By verifyNextPage = By.cssSelector(".product-breadcrumb.active");
+    private By verifyNextPage = By.xpath("//li[@class='product-breadcrumb active']");
     private By verifyOrder = By.cssSelector("div[class='modal-success__body'] h2");
     private By verifyAddAddress = By.cssSelector("div[class='card card-customer-address'] h5");
 
@@ -82,10 +82,13 @@ public class OderProductPage {
             webUI.setText(inputPrCode, poNumber);
             webUI.setText(inputPrFile, poFile);
             webUI.clickElement(btnNextPage);
+            if (webUI.verifyElementExist(verifyNextPage)) {
+                webUI.clickElement(btnNextPage);
+            }
+
         }
         getErrorMsg(element, msg);
-//        webUI.clickElement(btnNextPage);
-//        webUI.verifyElemenText(verifyNextPage, "Xác nhận");
+
     }
 
     void getErrorMsg(String element, String msg) {

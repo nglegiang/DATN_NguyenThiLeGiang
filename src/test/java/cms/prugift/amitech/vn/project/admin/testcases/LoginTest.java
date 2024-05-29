@@ -95,7 +95,7 @@ public class LoginTest {
     @AfterMethod
     public void takeScreenshot(ITestResult result) {
         // passed = SUCCESS v� failed = FAILURE
-        if (ITestResult.SUCCESS == result.getStatus()) {
+        if (ITestResult.FAILURE == result.getStatus()) {
             try {
                 CaptureHelpers.captureScreenshot(driver, result.getName());
 

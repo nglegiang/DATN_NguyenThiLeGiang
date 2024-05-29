@@ -1,5 +1,6 @@
 package cms.prugift.amitech.vn.project.admin.testcases;
 
+import cms.prugift.amitech.vn.helpers.CaptureHelpers;
 import cms.prugift.amitech.vn.helpers.ExcelHelper;
 import cms.prugift.amitech.vn.common.WebUI;
 import cms.prugift.amitech.vn.commons.BaseSetup;
@@ -13,10 +14,8 @@ import cms.prugift.amitech.vn.utils.enums.Category;
 import cms.prugift.amitech.vn.utils.extentreport.ExtentReportListener;
 import cms.prugift.amitech.vn.utils.extentreport.TestInfo;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.ITestResult;
+import org.testng.annotations.*;
 
 @Listeners(ExtentReportListener.class)
 public class CreateProductTest {
@@ -32,6 +31,7 @@ public class CreateProductTest {
 
     @BeforeClass
     public void setUp() throws Exception {
+        CaptureHelpers.startRecord("RecordCreateProductPage");
         driver = new BaseSetup().setupDriver("chrome");
         webUI = new WebUI(driver);
         excelHelper.setExcelFile("src/test/resources/testData/excel/DataTest.xlsx", "Login");
@@ -119,8 +119,21 @@ public class CreateProductTest {
         createProductPage = productManagementPage.openAddProductPage();
     }
 
+    @AfterMethod
+    public void takeScreenshot(ITestResult result) {
+        // passed = SUCCESS v� failed = FAILURE
+        if (ITestResult.FAILURE == result.getStatus()) {
+            try {
+                CaptureHelpers.captureScreenshot(driver, result.getName());
+            } catch (Exception e) {
+                System.out.println("Exception while taking screenshot " + e.getMessage());
+            }
+        }
+    }
+
     @AfterClass
     public void tearDown() {
+        CaptureHelpers.stopRecord();
         driver.quit();
     }
 }
